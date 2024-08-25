@@ -1,154 +1,1116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSploits - Roblox Exploits</title>
-    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
-	<link rel="stylesheet" type="text/css" href="styles.css">
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
-    <title>Website Name</title>
-    <meta content="RSploits.net" property="og:title" />
-    <meta content="RSploits is the reliable source for working exploits for roblox, trusted by the ROBLOXExploiting subreddit." property="og:description" />
-    <meta content="https://rsploits.net" property="og:url" />
-    <meta content="#777777" data-react-helmet="true" name="theme-color" />
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+    -webkit-user-select: none;
+    user-select: none;
+}
 
-    <!-- google stuff -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PTP8GVRXHJ"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-PTP8GVRXHJ');</script>
-    <meta name="google-site-verification" content="sDyuww7gx0uclXRfNkhdomUydNH_N30MXErE37MpXCQ" />
-    <meta name="google-adsense-account" content="ca-pub-9802561197217814" />
-    <meta name="Description" content="rsploits is a reliable source for working exploits for roblox." />
-    <!-- end google stuff -->
-</head>
-<body>
-    <div class="topbar">
-        <!-- google search is weird. -->
-        <p style="display: none;" content="rsploits is a reliable source for working exploits for roblox, trusted by the r/ROBLOXExploiting subreddit, providing honest ratings of roblox cheats and hacks, and exposing those that are malicious. rsploits.github.io contains a wide variety of cheats, hacks and exploits for the popular game roblox, for windows, android, macos, ios. all of them work in 2024.">
-        <div class="pagename">
-            <h2>RSploits.net</h2>
-        </div>
-        <a onclick="toggleNav();" class="hamburger">
-            ☰ More
-            <span class="popuptext" id="hamburgerpopup">Keysystem bypassers, RAT lists, Issues/Suggestions, and more!</span>
-        </a>
-        <script>
-            if (localStorage.getItem("hidepopup") == "true") { document.getElementById("hamburgerpopup").style.display = "none"; }
-        </script>
-    </div>
+body {
+    background-color: #000000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
 
-    <div id="contents">
-        <div class="container" id="adblockers" style="display: none;"></div>
-        <div class="container" id="viruses" style="display: none;"></div>
-        <div class="container" id="bypassers" style="display: none;"></div>
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1800px;
+    flex-wrap: wrap;
+    z-index: 1;
+    margin-top: 72px;
+}
 
-        <div id="exploits">
-            <div class="filterbuttoncontainer">
-                <button onclick="toggleFilterMenu();"></button>
-                <div class="filter-icon-container" id="filter" style="transform: translate(0px, -150px)">
-                    <div onclick="toggleFilter('ex_win', this)" class="filterico icon windows"></div>
-                    <div onclick="toggleFilter('ex_and', this)" class="filterico icon android"></div>
-                    <div onclick="toggleFilter('ex_mac', this)" class="filterico icon macos"></div>
-                    <div onclick="toggleFilter('ex_ios', this)" class="filterico icon ios"></div>
-                    <div onclick="toggleFilter('ex_keyless', this)" class="filterico icon hastext"><p>Keyless</p></div>
-                    <div onclick="toggleFilter('ex_free', this)" class="filterico icon hastext"><p>Free</p></div>
-                    <div onclick="toggleFilter('ex_decomp', this)" class="filterico icon hastext"><p>Decompiler</p></div>
-                </div>
-            </div>
-            <div class="container" id="exploitcontainer">
-                <div class="updatedVersionsContainerContainer">
-                    <div class="updatedVersionsContainer">
-                        <p class="updatedVersion">Latest Roblox Windows update: <span id="latestWinVer">UNKNOWN</span>, <wbr>updated on: <span id="latestWinVerDate">UNKNOWN</span></p>
-                        <p class="updatedVersion">Latest Roblox Android update: <span id="latestAndVer">UNKNOWN</span>, <wbr>updated on: <span id="latestAndVerDate">UNKNOWN</span></p>
-                        <p class="updatedVersion">Latest Roblox MacOS update: <span id="latestMacVer">UNKNOWN</span>, <wbr>updated on: <span id="latestMacVerDate">UNKNOWN</span></p>
-                        <p class="updatedVersion">Latest Roblox iOS update: <span id="latestIosVer">UNKNOWN</span>, <wbr>updated on: <span id="latestIosVerDate">UNKNOWN</span></p>
-                        <p class="updatedVersion small">The dates are formatted to your timezone.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="editor" class="container" style="display: none;">
-            <h1>Data Editor and Card Creator </h1>
-            <div class="editorButtonContainer">
-                <button class="editorButton" onclick="autoImportEditableCards();">Import automatically</button>
-                <button class="editorButton" onclick="importEditorCardsFromJson();">Import from json data</button> 
-                <button class="editorButton" onclick="addNewEditableCard();">Add card</button>
-                <button class="editorButton" onclick="exportEditorCardsToJson();">Export</button>
-            </div>
-            <div class="importExportContainer" id="exportContainer" style="display: none;">
-                <h3>Q: How do I export this to rsploits?</h3>
-                <p>A: If you are a moderator of r/ROBLOXExploiting, you should have access to the exploit-data github repository, where you can copy and paste the json data into the exploits.json file. If you don't have access yet, message u/david30121 on reddit or @justacoder on discord.</p>
-                <textarea readonly id="exportTextArea">if you are seeing this, something probably went wrong.</textarea>
-                <div class="editorButtonContainer">
-                    <button class="editorButton" onclick="navigator.clipboard.writeText(el('exportTextArea').value);">Copy to clipboard</button>
-                    <button class="editorButton" onclick="window.open('https://github.com/davidsaltacc/exploits-data/edit/main/exploits.json')">Open exploits.json as editable</button>
-                    <button class="editorButton" onclick="el('exportContainer').style.display = 'none';">Close</button>
-                </div>
-            </div>
-            <div class="importExportContainer" id="importContainer" style="display: none;">
-                <textarea placeholder="Paste json here..." id="importTextArea"></textarea>
-                <div class="editorButtonContainer">
-                    <button class="editorButton" onclick="createAllEditableCardsFromJson(el('importTextArea').value)">Import</button>
-                    <button class="editorButton" onclick="el('importContainer').style.display = 'none';">Close</button>
-                </div>
-            </div>
-            <div id="editorCardContainer" class="container"></div>
-        </div>
-        
-        <div id="issues" class="container" style="display: none;">
-            <h1 id="issuetitle">There seem to be no open issues</h1>
-            <button onclick="window.open('https://github.com/davidsaltacc/exploits-data/issues/new');">Open issue</button>
-        </div>
-        
-        <div id="credits" style="display: none;">
-            <div class="container">
-                <h1>Credits</h1>
-                <p>Site layout: justacoder</p>
-                <hr><p>Site content: justacoder</p>
-                <hr><p>Site code: justacoder</p>
-                <hr><p>Site background: justacoder</p>
-                <hr><p>Listed exploits: All the developers making them</p>
-                <hr><p>Exposed RATs: All the people that exposed them</p>
-                <hr><p>Roblox latest update API: edy131109</p>
-                <hr><p>Maintaining the site: justacoder</p>
-                <hr><p>Maintaining the site contents: everyone listed below</p>
-                <hr><br><br>
-                <hr><h2>Head editors</h2>
-                <p>justacoder</p>
-                <hr><h2>Trial editors</h2>
-                <p>Coti7, edy131109, tediousworkshop</p>
-            </div>
-        </div>
-    </div>
+.container .card {
+    position: relative;
+    width: 430px;
+    margin: 20px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: brightness(50%);
+    backdrop-filter: brightness(50%);
+    height: min-content;
+    transition: 0.5s;
+    min-height: 300px;
+    zoom: 80%;
+}
 
-    <div id="sidebar" style="left: -100vw;">
-        <img src="assets/background.png"></img>
-        <a onclick="changeTab('exploits', this);" id="nav_exploits_button" class="active">Exploits</a>
-        <a onclick="changeTab('viruses', this);" id="nav_viruses_button">Viruses/RATs/Fake Exploits</a>
-        <a onclick="changeTab('bypassers', this);" id="nav_bypassers_button">Keysystem bypassers</a>
-        <a onclick="changeTab('adblockers', this);" id="nav_adblockers_button">Adblockers</a>
-        <a onclick="changeTab('issues', this);" id="nav_issues_button">Issues and Suggestions</a>
-        <a onclick="changeTab('credits', this);" id="nav_credits_button">Credits</a>
-        <a onclick="window.open('https://ko-fi.com/justacoder');">Support the creator of this website!</a>
-        <a onclick="window.open('https://www.reddit.com/r/ROBLOXExploiting/comments/1ec157l/donate_to_the_sub');">Support r/ROBLOXExploiting!</a>
-        <a onclick="changeTab('editor', this);" id="nav_editor_button">Data Editor/Card Creator</a>
-    </div>
-    <div id="overlay" style="display: none; background-color: #00000000"></div>
-    <div id="background"></div>
-    <div class="bottomBarBorder"></div>
-    <div class="bottomBar">
-        <p>© 2024 The RSploits Team. All Rights Reserved.</p>
-    </div>
+@-moz-document url-prefix() {
+    .container .card {
+        font-size: 80%;
+    }
+}
+
+.container .bypass {
+    min-height: 0px;
+}
+
+.container .adblocker {
+    min-height: 0px;
+}
+
+.container .card:hover {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.container .card .content {
+    padding: 20px;
+    text-align: center;
+    width: 430px;
+    transition: 0.5s;
+}
+
+.container .card .content h3 {
+    font-size: 1.8em;
+    color: #efefff;
+    z-index: 1;
+}
+
+.container .card .content .text {
+    font-size: 1.08em;
+    color: #ffffff;
+    font-weight: 350;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    text-align: left;
+}
+
+.container .card .content .text a {
+    color: #bbd5ff;
+    text-decoration: none;
+    text-shadow: 0px 0px 10px rgba(183, 211, 255, 0.9);
+}
+
+body {
+    overscroll-behavior: none;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-image: url("assets/background.png");
+    background-size: cover;
+    z-index: -1; 
+}
+
+.container .card .content .text button, .excard button {
+    margin-top: 10px;
+    width: 385px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border-style: solid;
+    color: #ffffff;
+    font-weight: 600;
+    border-bottom-color: #00000000;
+    border-right-color: #00000000;
+    border-top-color: #afafaf4f;
+    border-left-color: #afafaf4f;
+    font-size: 0.9em;
+    background-color: #ffffff4f;
+}
+
+.g {
+    color: #6fff6f;
+}
+
+.n {
+    color: #ffff6f;
+}
+
+.b {
+    color: #ff6f6f;
+}
+
+hr {
+    margin-top: 8px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    border-color: #ffffff36;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-bottom: 12px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    background-size: 28px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #ffffff40;
+    border-radius: 4px;
+    padding: 22px;
+    margin-right: 2px;
+    margin-top: 3px;
+}
+
+.windows {
+    background-image: url("assets/icons/windows.svg");
+}
+
+.android {
+    background-image: url("assets/icons/android.svg");
+}
+
+.macos {
+    background-image: url("assets/icons/macos.svg");
+    background-size: 50px;
+}
+
+.ios {
+    background-image: url("assets/icons/ios.svg");
+}
+
+.topbar {
+    overflow: hidden;
+    background-color: #ffffff20;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 60px;
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    overflow: visible;
+    z-index: 102;
+}
+
+.topbar a {
+    float: right;
+    text-align: center;
+    padding: 18px 16px;
+    padding-right: 22px;
+    background-color: #ffffff30;
+    margin-left: 2px;
+    cursor: pointer;
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+}
+
+.topbar a:hover {
+    background-color: #ffffff40;
+}
+
+.topbar .pagename {
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ffffff30;
+    margin-right: 2px;
+    height: 100%;
+    padding: 3px 20px;
+    color: #e0e0e0;
+}
+
+.content h3 {
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.active {
+    color: #e0e0e0;
+    -webkit-backdrop-filter: brightness(60%);
+    backdrop-filter: brightness(60%);
+}
+
+#exploits {
+    margin-top: 52px;
+}
+
+.filterbuttoncontainer {
+    top: 72px;
+    left: 11px;
+    position: absolute;
+    display: flex;
+}
+
+.filterbuttoncontainer button {
+    border-radius: 6px;
+    min-width: 50px;
+    min-height: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: #00000000;
+    -webkit-backdrop-filter: brightness(80%);
+    backdrop-filter: brightness(80%);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    background-image: url("assets/icons/filter.svg");
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    margin-right: 0;
+}
+
+.filter-icon-container {
+    justify-content: center;
+    float: left;
+    margin-left: 5px;
+    display: flex;
+    transition: .4s;
+    transition-timing-function: ease-in-out;
+    flex-wrap: wrap;
+    z-index: 2;
+    background-color: #818181a0;
+    -webkit-backdrop-filter: brightness(60%);
+    backdrop-filter: brightness(60%);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 0;
+}
+
+.filterico {
+    cursor: pointer;
+    transition: 0.25s;
+    background-color: #ffffff00;
+    margin: 2px;
+}
+
+.filterico.active {
+    background-color: #5ffa5f80;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #444444; 
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888888; 
+    border-radius: 3px;
+}
+
+* {
+    scrollbar-color: #888888 #444444; 
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+}
+
+.small {
+    font-size: xx-small !important;
+}
+
+.small a {
+    color: #98afd4;
+    text-decoration: none;
+}
+
+#contents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+}
+
+#sidebar {
+    display: none;
+}
+
+.hamburger {
+    width: 130px;
+    height: 60px;
+    font-size: 1.5em;
+    line-height: 1em;
+    color: #e0e0e0;
+    display: block;
+}
+
+
+@media screen and (max-width: 400px) {
+    .container .card .content .text {
+        font-size: smaller;
+    }
+}
+
+#sidebar {
+    height: 100%;
+    width: 600px;
+    z-index: 103;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #a0a0a0;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 900px) {
+
+    .container .card {
+        width: 90vw;
+    }
     
-    <div id="discordpopupcontainer">
-        <span class="discordpopupX" onclick="document.getElementById('discordpopupcontainer').style.display = 'none';">X</span>
-        <div id="discordpopup" class="discordpopup" onclick="window.open('https://discord.gg/YcbH8KusyY');"></div>
-    </div>
-
-    <script src="index.js"></script>
-
-    <!-- ads? -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9802561197217814" crossorigin="anonymous"></script>
+    .container .card .content {
+        width: 90vw;
+    }
     
-</body>
-</html>
+    .container .card .content .text button {
+        width: 100%;
+    }
+
+    #sidebar {
+        width: 70vw;
+    }
+
+}
+
+#sidebar img {
+    height: max(calc(100% + 40px), 1000px);
+    position: absolute;
+    z-index: -1;
+    margin: -20px -20px -20px -20px;
+}
+
+#sidebar a {
+    color: #d0d0d0;
+    text-shadow: 0px 0px 10px rgba(183, 211, 255, 0.4);
+    font-size: larger;
+    padding: 10px;
+}
+
+#sidebar a.active {
+    color: #efefef;
+}
+
+#overlay {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+
+h1, h2 {
+    color: #efefef;
+}
+
+.editbutton {
+    font-size: small;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #ffffff20;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #efefef;
+    text-shadow: none;
+    font-weight: 500;
+    margin-bottom: 6px;
+    margin-top: 2px;
+}
+
+.editorButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editorButton {
+    padding: 5px;
+    margin-right: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    background-color: #00000000;
+    -webkit-backdrop-filter: brightness(90%);
+    backdrop-filter: brightness(90%);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.issue {
+    min-width: 60vw;
+}
+
+.issuedate {
+    color: #a0a0a0;
+    position: absolute;
+    top: 8px;
+    left: 13px;
+}
+
+.issueauthor {
+    color: #a0a0a0;
+    position: absolute;
+    top: calc(1em + 10px);
+    left: 13px;
+}
+
+.issue .content {
+    min-width: 60vw;
+}
+
+.issue .content .text {
+    font-size: 0.95em !important;
+}
+
+.issue .content h2 {
+    margin-top: 40px;
+}
+
+#issues {
+    flex-direction: column;
+}
+
+#issues button {
+    padding: 5px;
+    margin-right: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    background-color: #00000000;
+    -webkit-backdrop-filter: brightness(90%);
+    backdrop-filter: brightness(90%);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: medium;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+#issuetitle {
+    margin-bottom: 8px;
+    text-align: center;
+} 
+
+.openongithubbutton {
+    font-size: small;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #ffffff20;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #efefef;
+    text-shadow: none;
+    font-weight: 500;
+    margin-bottom: 6px;
+    margin-top: 2px;
+    margin-left: 10px;
+}
+
+.popuptext {
+    display: flex;
+    width: 120px;
+    background-color: #555555d0;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    padding: 8px;
+    z-index: 1;
+    bottom: -140%;
+    right: 15px;
+    border-radius: 5px;
+    font-size: x-small;
+}
+
+.popuptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
+#credits .container {
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#credits .container p {
+    color: #ffffff;
+    text-shadow: 0px 0px 7px #ffffff7f;
+    text-align: center;
+}
+
+#credits .container hr {
+    width: 500px;
+}
+
+.excard {
+    position: relative;
+    width: 800px;
+    margin: 20px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: brightness(50%);
+    backdrop-filter: brightness(50%);
+    height: min-content;
+    transition: 0.5s;
+    height: 330px;
+    zoom: 80%;
+}
+
+@-moz-document url-prefix() {
+    .excard {
+        font-size: 80%;
+    }
+}
+
+
+.excard:hover {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.excard .content {
+    padding: 20px;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.exname {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 350px;
+    height: 60px;
+    text-align: center;
+}
+
+.exprocon {
+    position: absolute;
+    left: 20px;
+    top: 90px;
+    width: 350px;
+    height: 218px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-align: left;
+}
+
+.exmeta {
+    position: absolute;
+    bottom: 200px;
+    right: 20px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.exdata {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+}
+
+.exdatalabel {
+    color: #ffffff;
+    text-align: left;
+    position: relative;
+    left: 10px;
+    top: 10px;
+    width: 200px;
+}
+
+.exdatavalue {
+    color: #ffffff;
+    text-align: right;
+    width: 100%;
+    position: relative;
+    right: 10px;
+    top: 10px;
+}
+
+.exdatavalue input {
+    width: 100%;
+}
+
+#credits .container hr {
+    width: 350px;
+}
+
+#credits .container h1 {
+    margin-bottom: 20px;
+    font-size: 50px;
+}
+
+.explatforms {
+    position: absolute;
+    right: 20px;
+    bottom: 111px;
+    width: 350px;
+}
+
+.explatformsiconcontainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-bottom: 20px;
+}
+
+.exfeatures {
+    width: 350px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 65px;
+    right: 20px;
+}
+
+.exfeatures hr {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 1px;
+    height: 30px;
+}
+
+.excard button {
+    width: 350px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .excard p {
+        font-size: smaller;
+    }
+
+}
+
+
+a {
+    cursor: pointer;
+    color: #bbd5ff;
+    text-decoration: none;
+    text-shadow: 0px 0px 10px rgba(183, 211, 255, 0.9);
+}
+
+.filterico.hastext {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+    width: min-content;
+    padding: 16px;
+}
+
+#nav_editor_button {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.editorcard input {
+    background-color: #00000000;
+    border-top: 1px solid #ffffff7f;
+    border-right: 1px solid #ffffff7f;
+    border-bottom: 1px solid #0000007f;
+    border-left: 1px solid #0000007f;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+.editorcard input:focus {
+    outline: #00000000;
+}
+
+.editorcard .exname input {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    width: 350px;
+}
+
+.editorcard .exdata input {
+    text-align: right;
+    padding: 4px;
+}
+
+.editorcard .icon {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.editorcard .icon.enabled {
+    background-color: #5ffa5f80;
+}
+
+.editorcard .icon.disabled {
+    background-color: #fa5f5f80;
+}
+
+.editorcard .exfeatures input {
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+    accent-color: #b8b8b8;
+}
+
+.editorcard button input {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 80%;
+}
+
+input.buttonUrl {
+    font-size: 1.1em !important;
+    font-weight: 300 !important;
+    width: 100% !important;
+    margin-bottom: 20px;
+}
+
+.editorcard {
+    height: 340px;
+    overflow: visible;
+}
+
+.editorcard button {
+    bottom: 35px;
+}
+
+.editorcard .exprocon button {
+    position: static;
+    width: 30px;
+    height: 30px;
+    margin: 4px;
+}
+
+.editorcard .exprocon button.addG {
+    background-color: #6fff6f7f;
+}
+
+.editorcard .exprocon button.addN {
+    background-color: #ffff6f7f;
+}
+
+.editorcard .exprocon button.addB {
+    background-color: #ff6f6f7f;
+}
+
+.removeprocon {
+    height: 20px !important;
+}
+
+.exprocon input {
+    width: calc(100% - 38px);
+    padding: 5px;
+}
+
+@-moz-document url-prefix() {
+    .exprocon p input {
+        font-size: 80%;
+    }
+}
+
+.exprocon p.g input {
+    color: #6fff6f;
+}
+
+.exprocon p.n input {
+    color: #ffff6f;
+}
+
+.exprocon p.b input {
+    color: #ff6f6f;
+}
+
+.editorCardControlsContainer {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: -25px;
+    right: 10px;
+    width: min-content;
+}
+
+.editorCardControlsContainer button {
+    width: 35px !important;
+    height: 35px;
+    position: static;
+    margin: 2px;
+    background-color: #3d3d3d94;
+    border: 1px solid #ffffff30;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 28px;
+}
+
+.editorCardControlsContainer button.up {
+    background-image: url("assets/icons/down-arrow.svg");
+    transform: scale(1, -1);
+}
+
+.editorCardControlsContainer button.down {
+    background-image: url("assets/icons/down-arrow.svg");
+}
+
+.editorCardControlsContainer button.remove {
+    background-image: url("assets/icons/trash.svg");
+    background-size: 24px;
+}
+
+.importExportContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000090;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #ffffff;
+    text-align: center;
+}
+
+.importExportContainer textarea {
+    resize: none;
+    width: 90vw;
+    height: 50%;
+    font-family: monospace;
+    padding: 5px;
+    background-color: #272727;
+    border: 0px;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    color: #ffffff;
+    text-align: left;
+}
+
+.importExportContainer textarea:focus {
+    outline: #00000000;
+}
+
+#editor {
+    flex-direction: column;
+}
+
+.updatedVersion {
+    color: #ffffff;
+    text-align: left;
+    font-size: 0.85em;
+}
+
+.updatedVersionsContainer {
+    width: max-content;
+    padding: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.updatedVersionsContainerContainer { /* this is dumb. */
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#exploits {
+    overflow-x: hidden;
+}
+
+#latestWinVer, #latestMacVer, #latestAndVer, #latestIosVer {
+    font-family: monospace;
+}
+
+#latestWinVerDate, #latestMacVerDate, #latestAndVerDate, #latestIosVerDate {
+    font-size: smaller;
+}
+
+.bottomBarBorder {
+    position: relative;
+    height: 1px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5));
+    z-index: 1;
+}
+
+.bottomBar {
+    position: relative;
+    height: 70px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #8a8a8a56;
+    z-index: 3;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin-bottom: 12px;
+}
+
+#discordpopupcontainer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    margin: 0;
+    padding: 0;
+    z-index: 3;
+}
+
+.discordpopup {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 35px;
+    border-radius: 30%;
+    background-color: #5663f1;
+    background-image: url("assets/icons/discord.svg");
+    background-repeat: no-repeat;
+    background-size: 50px;
+    background-position: center;
+    cursor: pointer;
+}
+
+.discordpopup:after {
+    content: attr(description-name);
+    display: block;
+    position: absolute;
+    left: -260px;
+    top: 29px;
+    width: max-content;
+    padding: 8px;
+    padding-top: 2px;
+    padding-bottom: 14px;
+    padding-right: 80px;
+    -webkit-backdrop-filter: brightness(60%) blur(4px);
+    backdrop-filter: brightness(60%) blur(4px);
+    color: #ffffff;
+    border-radius: 8px;
+    z-index: -1;
+    border: 1px solid #ffffff7b;
+}
+
+.discordpopup:before {
+    content: "Don't be afraid of the low membercount. We are new!";
+    display: block;
+    position: absolute;
+    left: -260px;
+    top: 45px;
+    width: max-content;
+    padding: 8px;
+    font-size: xx-small;
+    color: #ffffff;
+    z-index: 0;
+}
+
+.discordpopupX {
+    color: #ffffff;
+    position: relative;
+    top: 2px;
+    left: -18px;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    display: block;
+    -webkit-backdrop-filter: brightness(60%) blur(4px);
+    backdrop-filter: brightness(60%) blur(4px);
+    border: 1px solid #ffffff7b;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+
+    .excard {
+        width: 100vw;
+        height: 650px;
+    }
+
+    .exmeta, .explatforms, .exfeatures, .excard button { 
+        left: 20px; 
+    }
+
+    .exname, .exprocon, .exmeta, .explatforms, .exfeatures, .excard button, .editorcard .exname input {
+        width: calc(100% - 40px);
+    }
+
+    .exdatalabel, .exdatavalue, .editorcard .exdata input {
+        width: 100%;
+    }
+
+    .editorcard {
+        height: 660px !important;
+    }
+
+}
