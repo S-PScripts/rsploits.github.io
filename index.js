@@ -1,5 +1,5 @@
 
-var EXPLOIT_DATA_URL = "https://raw.githubusercontent.com/davidsaltacc/exploits-data/main/exploits.json";
+var EXPLOIT_DATA_URL = "https://raw.githubusercontent.com/S-PScripts/rsploits.github.io/main/exploits.json";
 var MALWARE_DATA_URL = "https://raw.githubusercontent.com/davidsaltacc/exploits-data/main/viruses-rats-fakes.json";
 var BYPASSERS_DATA_URL = "https://raw.githubusercontent.com/davidsaltacc/exploits-data/main/bypassers.json";
 var ADBLOCKERS_DATA_URL = "https://raw.githubusercontent.com/davidsaltacc/exploits-data/main/adblockers.json";
