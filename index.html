@@ -1,1 +1,154 @@
-discontinued.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSploits - Roblox Exploits</title>
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+    <title>Website Name</title>
+    <meta content="RSploits.net" property="og:title" />
+    <meta content="RSploits is the reliable source for working exploits for roblox, trusted by the ROBLOXExploiting subreddit." property="og:description" />
+    <meta content="https://rsploits.net" property="og:url" />
+    <meta content="#777777" data-react-helmet="true" name="theme-color" />
+
+    <!-- google stuff -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PTP8GVRXHJ"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-PTP8GVRXHJ');</script>
+    <meta name="google-site-verification" content="sDyuww7gx0uclXRfNkhdomUydNH_N30MXErE37MpXCQ" />
+    <meta name="google-adsense-account" content="ca-pub-9802561197217814" />
+    <meta name="Description" content="rsploits is a reliable source for working exploits for roblox." />
+    <!-- end google stuff -->
+</head>
+<body>
+    <div class="topbar">
+        <!-- google search is weird. -->
+        <p style="display: none;" content="rsploits is a reliable source for working exploits for roblox, trusted by the r/ROBLOXExploiting subreddit, providing honest ratings of roblox cheats and hacks, and exposing those that are malicious. rsploits.github.io contains a wide variety of cheats, hacks and exploits for the popular game roblox, for windows, android, macos, ios. all of them work in 2024.">
+        <div class="pagename">
+            <h2>RSploits.net</h2>
+        </div>
+        <a onclick="toggleNav();" class="hamburger">
+            ☰ More
+            <span class="popuptext" id="hamburgerpopup">Keysystem bypassers, RAT lists, Issues/Suggestions, and more!</span>
+        </a>
+        <script>
+            if (localStorage.getItem("hidepopup") == "true") { document.getElementById("hamburgerpopup").style.display = "none"; }
+        </script>
+    </div>
+
+    <div id="contents">
+        <div class="container" id="adblockers" style="display: none;"></div>
+        <div class="container" id="viruses" style="display: none;"></div>
+        <div class="container" id="bypassers" style="display: none;"></div>
+
+        <div id="exploits">
+            <div class="filterbuttoncontainer">
+                <button onclick="toggleFilterMenu();"></button>
+                <div class="filter-icon-container" id="filter" style="transform: translate(0px, -150px)">
+                    <div onclick="toggleFilter('ex_win', this)" class="filterico icon windows"></div>
+                    <div onclick="toggleFilter('ex_and', this)" class="filterico icon android"></div>
+                    <div onclick="toggleFilter('ex_mac', this)" class="filterico icon macos"></div>
+                    <div onclick="toggleFilter('ex_ios', this)" class="filterico icon ios"></div>
+                    <div onclick="toggleFilter('ex_keyless', this)" class="filterico icon hastext"><p>Keyless</p></div>
+                    <div onclick="toggleFilter('ex_free', this)" class="filterico icon hastext"><p>Free</p></div>
+                    <div onclick="toggleFilter('ex_decomp', this)" class="filterico icon hastext"><p>Decompiler</p></div>
+                </div>
+            </div>
+            <div class="container" id="exploitcontainer">
+                <div class="updatedVersionsContainerContainer">
+                    <div class="updatedVersionsContainer">
+                        <p class="updatedVersion">Latest Roblox Windows update: <span id="latestWinVer">UNKNOWN</span>, <wbr>updated on: <span id="latestWinVerDate">UNKNOWN</span></p>
+                        <p class="updatedVersion">Latest Roblox Android update: <span id="latestAndVer">UNKNOWN</span>, <wbr>updated on: <span id="latestAndVerDate">UNKNOWN</span></p>
+                        <p class="updatedVersion">Latest Roblox MacOS update: <span id="latestMacVer">UNKNOWN</span>, <wbr>updated on: <span id="latestMacVerDate">UNKNOWN</span></p>
+                        <p class="updatedVersion">Latest Roblox iOS update: <span id="latestIosVer">UNKNOWN</span>, <wbr>updated on: <span id="latestIosVerDate">UNKNOWN</span></p>
+                        <p class="updatedVersion small">The dates are formatted to your timezone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="editor" class="container" style="display: none;">
+            <h1>Data Editor and Card Creator </h1>
+            <div class="editorButtonContainer">
+                <button class="editorButton" onclick="autoImportEditableCards();">Import automatically</button>
+                <button class="editorButton" onclick="importEditorCardsFromJson();">Import from json data</button> 
+                <button class="editorButton" onclick="addNewEditableCard();">Add card</button>
+                <button class="editorButton" onclick="exportEditorCardsToJson();">Export</button>
+            </div>
+            <div class="importExportContainer" id="exportContainer" style="display: none;">
+                <h3>Q: How do I export this to rsploits?</h3>
+                <p>A: If you are a moderator of r/ROBLOXExploiting, you should have access to the exploit-data github repository, where you can copy and paste the json data into the exploits.json file. If you don't have access yet, message u/david30121 on reddit or @justacoder on discord.</p>
+                <textarea readonly id="exportTextArea">if you are seeing this, something probably went wrong.</textarea>
+                <div class="editorButtonContainer">
+                    <button class="editorButton" onclick="navigator.clipboard.writeText(el('exportTextArea').value);">Copy to clipboard</button>
+                    <button class="editorButton" onclick="window.open('https://github.com/davidsaltacc/exploits-data/edit/main/exploits.json')">Open exploits.json as editable</button>
+                    <button class="editorButton" onclick="el('exportContainer').style.display = 'none';">Close</button>
+                </div>
+            </div>
+            <div class="importExportContainer" id="importContainer" style="display: none;">
+                <textarea placeholder="Paste json here..." id="importTextArea"></textarea>
+                <div class="editorButtonContainer">
+                    <button class="editorButton" onclick="createAllEditableCardsFromJson(el('importTextArea').value)">Import</button>
+                    <button class="editorButton" onclick="el('importContainer').style.display = 'none';">Close</button>
+                </div>
+            </div>
+            <div id="editorCardContainer" class="container"></div>
+        </div>
+        
+        <div id="issues" class="container" style="display: none;">
+            <h1 id="issuetitle">There seem to be no open issues</h1>
+            <button onclick="window.open('https://github.com/davidsaltacc/exploits-data/issues/new');">Open issue</button>
+        </div>
+        
+        <div id="credits" style="display: none;">
+            <div class="container">
+                <h1>Credits</h1>
+                <p>Site layout: justacoder</p>
+                <hr><p>Site content: justacoder</p>
+                <hr><p>Site code: justacoder</p>
+                <hr><p>Site background: justacoder</p>
+                <hr><p>Listed exploits: All the developers making them</p>
+                <hr><p>Exposed RATs: All the people that exposed them</p>
+                <hr><p>Roblox latest update API: edy131109</p>
+                <hr><p>Maintaining the site: justacoder</p>
+                <hr><p>Maintaining the site contents: everyone listed below</p>
+                <hr><br><br>
+                <hr><h2>Head editors</h2>
+                <p>justacoder</p>
+                <hr><h2>Trial editors</h2>
+                <p>Coti7, edy131109, tediousworkshop</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar" style="left: -100vw;">
+        <img src="assets/background.png"></img>
+        <a onclick="changeTab('exploits', this);" id="nav_exploits_button" class="active">Exploits</a>
+        <a onclick="changeTab('viruses', this);" id="nav_viruses_button">Viruses/RATs/Fake Exploits</a>
+        <a onclick="changeTab('bypassers', this);" id="nav_bypassers_button">Keysystem bypassers</a>
+        <a onclick="changeTab('adblockers', this);" id="nav_adblockers_button">Adblockers</a>
+        <a onclick="changeTab('issues', this);" id="nav_issues_button">Issues and Suggestions</a>
+        <a onclick="changeTab('credits', this);" id="nav_credits_button">Credits</a>
+        <a onclick="window.open('https://ko-fi.com/justacoder');">Support the creator of this website!</a>
+        <a onclick="window.open('https://www.reddit.com/r/ROBLOXExploiting/comments/1ec157l/donate_to_the_sub');">Support r/ROBLOXExploiting!</a>
+        <a onclick="changeTab('editor', this);" id="nav_editor_button">Data Editor/Card Creator</a>
+    </div>
+    <div id="overlay" style="display: none; background-color: #00000000"></div>
+    <div id="background"></div>
+    <div class="bottomBarBorder"></div>
+    <div class="bottomBar">
+        <p>© 2024 The RSploits Team. All Rights Reserved.</p>
+    </div>
+    
+    <div id="discordpopupcontainer">
+        <span class="discordpopupX" onclick="document.getElementById('discordpopupcontainer').style.display = 'none';">X</span>
+        <div id="discordpopup" class="discordpopup" onclick="window.open('https://discord.gg/YcbH8KusyY');"></div>
+    </div>
+
+    <script src="index.js"></script>
+
+    <!-- ads? -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9802561197217814" crossorigin="anonymous"></script>
+    
+</body>
+</html>
